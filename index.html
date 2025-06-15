@@ -1,4 +1,3 @@
-<!-- CODE BY ALZZ - Update by Alzz -->
 <!DOCTYPE html>
 <html lang="id" data-bs-theme="dark">
 <head>
@@ -13,13 +12,27 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #8b5cf6;
+      --success: #34d399;
+      --dark-bg: #121212;
+      --card-bg: #1e1e1e;
+      --text-light: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
       min-height: 100vh;
       margin: 0;
       overflow-x: hidden;
+      color: var(--text-light);
+      padding: 1rem;
     }
 
     #particles-js {
@@ -27,89 +40,130 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%);
+      background: transparent;
+      top: 0;
+      left: 0;
     }
 
     .container {
       position: relative;
       z-index: 1;
+      max-width: 500px;
     }
 
-    .neumorphic-card {
-      background: #1a1a1a;
+    .app-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-top: 1rem;
+    }
+
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .app-logo i {
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .card {
+      background: rgba(30, 30, 30, 0.8);
       border-radius: 20px;
       padding: 2rem;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
     }
 
-    .neumorphic-card::before {
+    .card::before {
       content: '';
       position: absolute;
       top: -2px;
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(45deg, 
-        rgba(99,102,241,0.2) 0%,
-        rgba(168,85,247,0.2) 50%,
-        rgba(99,102,241,0.2) 100%);
+      background: var(--gradient);
       z-index: -1;
       border-radius: 22px;
+      opacity: 0.3;
     }
 
     .form-label {
-      color: #e0e0e0;
+      color: var(--text-light);
       font-weight: 500;
       letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
     }
 
-    .glow-input {
-      background: rgba(255,255,255,0.05) !important;
-      border: 1px solid rgba(255,255,255,0.1) !important;
-      color: #fff !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 2px !important;
-    }
-
-    .glow-input:focus {
-      background: rgba(255,255,255,0.08) !important;
-      border-color: #6366f1 !important;
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.3) !important;
+    .input-group {
+      margin-bottom: 1.5rem;
     }
 
     .input-group-text {
       background: rgba(99,102,241,0.2) !important;
       border: 1px solid rgba(99,102,241,0.3) !important;
       color: #a5b4fc !important;
-      border-radius: 5px 0 0 5px !important;
+      border-radius: 12px 0 0 12px !important;
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      color: #fff !important;
+      border-radius: 0 12px 12px 0 !important;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      background: rgba(255,255,255,0.08) !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25) !important;
     }
 
     #feeInfo {
       background: linear-gradient(45deg, rgba(99,102,241,0.1), rgba(168,85,247,0.1));
       border-radius: 15px;
-      padding: 1rem;
+      padding: 1.2rem;
       border: 1px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(5px);
+      margin-top: 1.5rem;
     }
 
     .btn-primary {
-      background: linear-gradient(45deg, #6366f1, #8b5cf6);
+      background: var(--gradient);
       border: none;
       border-radius: 12px !important;
       font-weight: 600;
       letter-spacing: 0.5px;
       padding: 1rem 2rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       position: relative;
       overflow: hidden;
+      width: 100%;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
     }
 
     .btn-primary::after {
@@ -132,39 +186,85 @@
       100% { transform: translateX(100%) rotate(45deg); }
     }
 
-    #qrResult .card {
-      background: rgba(0,0,0,0.3) !important;
-      border: 1px solid rgba(99,102,241,0.3);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
+    #qrResult {
+      display: none;
+      animation: fadeIn 0.5s forwards;
     }
 
-    #qrResult .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, 
-        rgba(99,102,241,0.1) 0%,
-        rgba(168,85,247,0.1) 100%);
-      z-index: -1;
+    .qr-section {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+      border: 1px solid rgba(99,102,241,0.3);
+      margin-top: 1.5rem;
     }
 
     .qr-image {
-      width: 250px;
-      height: 250px;
+      width: 220px;
+      height: 220px;
       border: 2px solid rgba(99,102,241,0.3);
       border-radius: 15px;
       padding: 10px;
-      background: rgba(0,0,0,0.2);
+      background: white;
+      margin: 1rem auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
-    .text-success {
-      color: #34d399 !important;
+    .amount-display {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--success);
+      margin: 1rem 0;
+    }
+
+    .trx-id {
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-light);
+      border-radius: 12px;
+      flex: 1;
+      padding: 0.75rem;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer a {
+      color: #a5b4fc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--primary);
+      text-decoration: underline;
     }
 
     @keyframes fadeIn {
@@ -172,8 +272,18 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 768px) {
-      .neumorphic-card {
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+    }
+
+    @media (max-width: 576px) {
+      .card {
         padding: 1.5rem;
       }
       
@@ -182,153 +292,121 @@
         height: 200px;
       }
       
-      .masalah a {
-        margin: 1px;
-        padding: 10px;
-        color: #0086FF;
-        bottom: 10px;
-        right: 40px;
-        left: 20px;
-        z-index: 999;
+      .app-logo {
+        width: 70px;
+        height: 70px;
       }
-      
-      .copy p {
-        bottom: 30px;
-        text-align: center;
-        text-decoration: none;
-      }
-      
-      .copy a {
-        color: #8b5cf6;
-        text-decoration: none;
-}
-  .btn-download {
-    background: linear-gradient(45deg, #34d399, #10b981);
-    border: none;
-    border-radius: 12px !important;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 0.75rem 1.5rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-download:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(52, 211, 153, 0.3);
-  }
-  
-  .btn-download::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg,
-        transparent 25%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 75%);
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
-  }
     }
   </style>
 </head>
-<body class="min-vh-100 d-flex align-items-center justify-content-center">
+<body>
 
 <div id="particles-js"></div>
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
-      <div class="neumorphic-card p-4 mb-5">
-        <div class="text-center mb-4">
-          <h1 class="text-white fw-bold mb-3" style="font-size: 2rem;">QRIS Payment</h1>
-          <p class="text-muted mb-0">Digital Payment Solution</p>
-        </div>
+<div class="container py-4">
+  <div class="app-header">
+    <div class="app-logo pulse">
+      <i class="fas fa-qrcode"></i>
+    </div>
+    <h1 class="text-white fw-bold">QRIS Payment</h1>
+    <p class="text-muted">Digital Payment Solution</p>
+  </div>
 
-        <div class="mb-4">
-          <label for="amountInput" class="form-label">Nominal Pembayaran</label>
-          <div class="input-group">
-            <span class="input-group-text">Rp</span>
-            <input type="number" class="form-control glow-input" 
-                   id="amountInput" placeholder="Contoh: 100000">
-          </div>
-          <div id="feeInfo" class="mt-3 d-none text-white-50">
-            <div class="d-flex justify-content-between">
-              <span>Nominal:</span>
-              <span>Rp <span id="originalAmount">0</span></span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <span>Biaya Admin:</span>
-              <span>Rp <span id="adminFee">0</span></span>
-            </div>
-            <div class="d-flex justify-content-between mt-2 fw-bold">
-              <span>Total:</span>
-              <span class="text-success">Rp <span id="totalAmount">0</span></span>
-            </div>
-          </div>
+  <div class="card">
+    <div class="mb-3">
+      <label for="amountInput" class="form-label">Nominal Pembayaran</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+        <input type="number" class="form-control" 
+               id="amountInput" placeholder="Contoh: 100000">
+      </div>
+      <div id="feeInfo" class="mt-4 d-none">
+        <div class="d-flex justify-content-between">
+          <span>Nominal:</span>
+          <span>Rp <span id="originalAmount">0</span></span>
         </div>
-
-        <button class="btn btn-primary w-100 mb-4" onclick="generateQRIS()">
-          <span class="d-flex align-items-center justify-content-center gap-2">
-            <span class="spinner-border spinner-border-sm d-none" id="loadingSpinner"></span>
-            GENERATE QRIS
-          </span>
-        </button>
-
-        <div id="qrResult" class="d-none animate__animated animate__fadeIn">
-          <div class="card">
-            <div class="card-body text-center">
-              <h5 class="text-white mb-3">Scan Pembayaran</h5>
-              <img id="qrImage" src="" alt="QR Code" class="qr-image mb-3">
-              <div class="text-white">
-                <p class="mb-1 small">Total Pembayaran</p>
-                <h4 class="text-success fw-bold mb-3">Rp <span id="displayTotalAmount">0</span></h4>
-                <p class="text-muted small mb-0">ID : <span id="trxId" class="text-info">ID-XXXXXX</span></p>
-              </div>
-            </div>
-          </div>
+        <div class="d-flex justify-content-between mt-2">
+          <span>Biaya Admin:</span>
+          <span>Rp <span id="adminFee">0</span></span>
         </div>
-          <div class="copy">
-   <p class="text-muted mb-0">
-     &copy; 2025 QRIS Payment <a href="https://t.me/AlzzHost" target="_blank">Alzz</a>
-   </p>
- </div>
+        <div class="d-flex justify-content-between mt-3 fw-bold">
+          <span>Total:</span>
+          <span class="text-success">Rp <span id="totalAmount">0</span></span>
+        </div>
       </div>
     </div>
+
+    <button class="btn btn-primary" onclick="generateQRIS()">
+      <span class="d-flex align-items-center justify-content-center gap-2">
+        <span class="spinner-border spinner-border-sm d-none" id="loadingSpinner"></span>
+        GENERATE QRIS
+      </span>
+    </button>
+
+    <div id="qrResult">
+      <div class="qr-section">
+        <h5 class="text-white mb-3">Scan Pembayaran</h5>
+        <img id="qrImage" src="" alt="QR Code" class="qr-image">
+        <div class="amount-display">Rp <span id="displayTotalAmount">0</span></div>
+        <div class="trx-id">ID: <span id="trxId">ID-XXXXXX</span></div>
+        
+        <div class="action-buttons">
+          <button class="btn btn-secondary" onclick="downloadQR()">
+            <i class="fas fa-download me-2"></i> Download
+          </button>
+          <button class="btn btn-secondary" onclick="shareQR()">
+            <i class="fas fa-share-alt me-2"></i> Share
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p class="mb-0">
+      &copy; 2025 QRIS Payment • <a href="https://t.me/AlzzHost" target="_blank">Alzz</a>
+    </p>
+    <p class="small mt-2">Solusi pembayaran digital yang aman dan terpercaya</p>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+  // Inisialisasi partikel background
   particlesJS("particles-js", {
     particles: {
-      number: { value: 80 },
-      color: { value: "#ff00ff" },
+      number: { value: 70, density: { enable: true, value_area: 800 } },
+      color: { value: "#6366f1" },
       shape: { type: "circle" },
-      opacity: { value: 0.15 },
-      size: { value: 2 },
-      move: { enable: true, speed: 1.5 }
+      opacity: { value: 0.3, random: true },
+      size: { value: 3, random: true },
+      move: { 
+        enable: true, 
+        speed: 1.5, 
+        direction: "none",
+        random: true,
+        out_mode: "out"
+      }
     },
     interactivity: {
-      events: { onhover: { enable: false } }
+      events: { onhover: { enable: true, mode: "repulse" } }
     }
   });
 
+  // Fungsi untuk membuat ID transaksi acak
   function generateRandomId(length = 8) {
     return Math.random().toString(36).substr(2, length).toUpperCase();
   }
 
+  // Fungsi utama untuk menghasilkan QRIS
   function generateQRIS() {
     const amountInput = document.getElementById('amountInput');
     const amount = parseInt(amountInput.value);
-    const btn = document.querySelector('button');
+    const btn = document.querySelector('.btn-primary');
     const spinner = document.getElementById('loadingSpinner');
     const feeInfo = document.getElementById('feeInfo');
 
+    // Validasi input
     if (!amount || amount < 1000) {
       amountInput.classList.add('animate__animated', 'animate__headShake');
       setTimeout(() => amountInput.classList.remove('animate__animated', 'animate__headShake'), 500);
@@ -338,13 +416,14 @@
         title: 'Invalid Amount',
         text: 'Minimum pembayaran Rp 1.000',
         background: '#1a1a1a',
-        color: 'white'
+        color: 'white',
+        confirmButtonColor: '#6366f1'
       });
       return;
     }
 
     // Generate biaya admin
-    const adminFees = [330, 140, 260, 590, 299, 369, 245, 115, 210, 103, 305, 270, 332, 5, 999];
+    const adminFees = [330, 140, 260, 590, 299, 369, 245, 115, 210, 103, 305, 270, 332, 5, 999, 333];
     const randomFee = adminFees[Math.floor(Math.random() * adminFees.length)];
     const totalAmount = amount + randomFee;
 
@@ -357,6 +436,7 @@
     btn.disabled = true;
     spinner.classList.remove('d-none');
 
+    // Simulasi proses pembuatan QR
     setTimeout(() => {
       const trxId = generateRandomId();
       const qrUrl = `https://api.kenz.my.id/api/v2/payment/createpayment?UrlQris=00020101021126670016COM.NOBUBANK.WWW01189360050300000879140214515291627902280303UMI51440014ID.CO.QRIS.WWW0215ID20253689355520303UMI5204541153033605802ID5921KENZ+MARKET+OK21700366006CIAMIS61054621162070703A01630476B1&amount=${totalAmount}`;
@@ -364,8 +444,14 @@
       document.getElementById('qrImage').src = qrUrl;
       document.getElementById('trxId').textContent = trxId;
       document.getElementById('displayTotalAmount').textContent = totalAmount.toLocaleString('id-ID');
-      document.getElementById('qrResult').classList.remove('d-none');
+      
+      // Tampilkan hasil QR
+      document.getElementById('qrResult').style.display = 'block';
+      
+      // Animasi muncul
+      document.getElementById('qrResult').classList.add('animate__animated', 'animate__fadeInUp');
 
+      // Notifikasi sukses
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -379,7 +465,52 @@
 
       btn.disabled = false;
       spinner.classList.add('d-none');
+      
+      // Scroll ke hasil QR
+      document.getElementById('qrResult').scrollIntoView({ behavior: 'smooth' });
     }, 1500);
+  }
+
+  // Fungsi untuk download QR
+  function downloadQR() {
+    const qrImage = document.getElementById('qrImage');
+    const link = document.createElement('a');
+    link.href = qrImage.src;
+    link.download = 'qris-payment-' + document.getElementById('trxId').textContent + '.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Downloaded!',
+      text: 'QR Code berhasil diunduh',
+      background: '#1a1a1a',
+      color: 'white',
+      confirmButtonColor: '#6366f1',
+      timer: 2000
+    });
+  }
+
+  // Fungsi untuk share QR
+  function shareQR() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'QRIS Payment',
+        text: 'Silakan scan QR Code untuk pembayaran',
+        url: window.location.href
+      })
+      .catch(error => console.log('Error sharing:', error));
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Share QR',
+        html: 'Salin link berikut untuk berbagi:<br><input type="text" class="form-control mt-2" value="' + window.location.href + '" readonly>',
+        background: '#1a1a1a',
+        color: 'white',
+        confirmButtonColor: '#6366f1'
+      });
+    }
   }
 </script>
 
