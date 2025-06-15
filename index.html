@@ -473,14 +473,30 @@
 
   // Fungsi untuk download QR
   function downloadQR() {
-    const qrImage = document.getElementById('qrImage');
+  const qrImage = document.getElementById('qrImage');
+  const imageUrl = qrImage.src;
+  const fileName = 'qris-payment-' + document.getElementById('trxId').textContent + '.png';
+
+  // Use fetch to get the image
+  fetch(imageUrl, {
+    mode: 'cors', // try with cors, but if server doesn't support, this will fail
+    headers: new Headers({
+      'Origin': window.location.origin
+    }),
+  })
+  .then(response => response.blob())
+  .then(blob => {
+    // Create a blob URL
+    const blobUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = qrImage.src;
-    link.download = 'qris-payment-' + document.getElementById('trxId').textContent + '.png';
+    link.href = blobUrl;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+    // Revoke the blob URL
+    URL.revokeObjectURL(blobUrl);
+
     Swal.fire({
       icon: 'success',
       title: 'Downloaded!',
@@ -490,8 +506,19 @@
       confirmButtonColor: '#6366f1',
       timer: 2000
     });
-  }
-
+  })
+  .catch(error => {
+    console.error('Error downloading image:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Gagal Mengunduh',
+      text: 'Tidak dapat mengunduh gambar QR. Silakan coba lagi atau gunakan tangkapan layar.',
+      background: '#1a1a1a',
+      color: 'white',
+      confirmButtonColor: '#6366f1'
+    });
+  });
+}
   // Fungsi untuk share QR
   function shareQR() {
     if (navigator.share) {
